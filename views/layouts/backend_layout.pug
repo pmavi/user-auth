@@ -1,0 +1,40 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(content="width=device-width, initial-scale=1.0", name="viewport")
+
+    // Favicons
+    link(href="/assets/img/fav.png", rel="icon")
+    link(href="/assets/img/fav.png", rel="apple-touch-icon")
+    // Google Fonts
+    link(href="https://fonts.gstatic.com", rel="preconnect")
+    link(href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i", rel="stylesheet")
+    // Vendor CSS Files
+    link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/assets/css/bootstrap-icons.css")
+    link(rel="stylesheet", href="/assets/css/bootstrap-notify.css")
+
+
+    // Template Main CSS File
+    link(rel="stylesheet", href="/assets/css/style.css")
+    link(rel="stylesheet", href="/assets/css/developer.css")
+
+    script.
+      let ajax_url = `!{process.env.APP_URL}`;
+      let store_url = `!{store_id}`;
+
+    body
+      block content
+
+    script(type='text/javascript', src='/assets/js/jquery.js')
+    script(type='text/javascript', src='/assets/js/bootstrap.min.js')
+    script(type='text/javascript', src='/assets/js/jquery.validate.min.js')
+    script(type='text/javascript', src='/assets/js/tinymce.min.js')
+    script(type='text/javascript', src='/assets/js/main.js')
+    script(type='text/javascript', src='/assets/js/bootstrap.bundle.js')
+    script(type='text/javascript', src='/assets/js/bootstrap-notify.min.js')
+    script(type='text/javascript', src='/assets/js/sweetalert.min.js')
+    script(type='text/javascript', src='/assets/js/custom/common.js')
+
+    block scripts

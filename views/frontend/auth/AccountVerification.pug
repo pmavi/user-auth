@@ -1,0 +1,48 @@
+
+extends ../../layouts/frontend
+
+block content 
+    main.confirm-email-template(marginheight="0", topmargin="0", marginwidth="0", leftmargin="0")
+        div(cellspacing="0", cellpadding="0", width="100%")
+            row
+                form#resend_verify_email(method="post" )
+                    input( type='hidden'  name="id", value= user ? user.id:'')
+                    input( type='hidden'  name="first_name" value=user ? user.first_name:'')
+                    input( type='hidden'  name="last_name" value=user? user.last_name:'')
+                    input( type='hidden'  name="email" value=user? user.email: '')
+                    div.confirm-email-tbl(width="100%", cellpadding="0", cellspacing="0")
+                        row
+                            div.confirm-email-td1
+                        row
+                            div.confimr-email-td2
+                        row
+                            div
+                                div.confirm-email-table(width="95%", cellpadding="0", cellspacing="0")
+                                    row
+                                        div.confirm-email-td3
+                                            h1.confirm-email-text
+                                                | Verify your account
+                                            br
+                                            h3
+                                                | A verification email has been sent to #{user?user.email:''}. Please check your mailbox to verify the account before you log in.
+                                         
+                                               
+                                            span.confirm-email-span
+                                            p.confirm-email-msg
+                                                | Can't find the email?
+                                            button.confirm-email-login(type="submit")
+                                                | Resend Email
+                                            <p id="loading_button" class="displaynone"  disabled>
+                                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            |Sending...
+                                            </p>
+                                            <br>
+                                            span.confirm-email-span
+                                            p.confirm-email-msg
+                                                | Already verified? Log in to access your account. 
+                                            a.confirm-email-login(href="/")
+                                                | Log in
+
+                                           
+block scripts
+    script(type='text/javascript', src='/assets/js/custom/auth.js')

@@ -1,0 +1,39 @@
+
+extends ../../layouts/backend_layout
+
+block content 
+    main.confirm-email-template(marginheight="0", topmargin="0", marginwidth="0", leftmargin="0")
+        div(cellspacing="0", cellpadding="0", width="100%")
+            row
+                div
+                    div.confirm-email-tbl(width="100%", cellpadding="0", cellspacing="0")
+                        row
+                            div.confirm-email-td1
+                        row
+                            div.confimr-email-td2
+                        row
+                            div
+                                div.confirm-email-table(width="95%", cellpadding="0", cellspacing="0")
+                                    row
+                                        div.confirm-email-td3
+                                            h1.confirm-email-text
+                                                | Success!<br>
+                                            h1.confirm-email-text
+                                                | Thanks for verifying your email address<br>
+                                            h3
+                                                | Verifying your email address is a simple way to prove that you're a real user and makes your account more secure. 
+                                            span.confirm-email-span
+                                            p.confirm-email-msg
+                                                | 
+                                                | Log in now to start using Checkout Master features.
+                                            a.confirm-email-login(href="/")
+                                                | 
+                                                | Log in
+
+block scripts
+    script.
+        $(document).ready(function($) {
+            setTimeout(()=>{
+                window.location.href = "/";
+            },5000)
+        });

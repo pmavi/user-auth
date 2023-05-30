@@ -1,0 +1,200 @@
+extends ../../layouts/backend_layout
+
+block content
+  main#main.main
+
+
+    section.section.dashboard
+      .row.align-items-center.site-breadcrumb.mb-5
+        h1 Dashboard
+        nav
+          ol.breadcrumb
+            li.breadcrumb-item Home
+            li.breadcrumb-item.active Dashboard    
+      if(!session.auth_store.customize_checkout_publish)
+        div.row.storesetup_onboarding
+          .col-md-6
+                  .sec_img 
+                    img(src='/assets/img/dashboard.png')
+
+          .col-md-6
+            .pagetitle  
+              h1 Get started with Checkout Master
+              p Start processing checkouts in no time. Just follow the steps bellow and when done you can publish your checkout:
+
+            .card
+              .card-body.text-sm-start
+                div.d-flex.align-items-center.justify-content-between.card_custom
+                  span 1. Confirm Shipping Rates on your checkout
+                  if(session.auth_store && !session.auth_store.shipping_rate)
+                    div.card-button.text-center.text-sm-end.mt-3.mt-sm-0 
+                      a#shipping_rates_button.btn.btn-primary(href=`/${session.auth_store.id}/shipping-rates`) Publish
+                  else
+                    <i id="shipping_rates_icon" class="bi bi-check-circle-fill card-button-icon"></i>
+                
+            .card
+              .card-body.text-sm-start
+                div.d-flex.align-items-center.justify-content-between.card_custom
+                  span 2. Add Payment Methods to your checkout
+                  if(session.auth_store && !session.auth_store.payment_method)
+                    div.card-button.text-center.text-sm-end.mt-3.mt-sm-0 
+                      a#payment_methods_button.btn.btn-primary(href=`/${session.auth_store.id}/payment-methods`) Publish
+                  else
+                    <i id="payment_methods_icon" class="bi bi-check-circle-fill card-button-icon"></i>
+            
+            .card
+              .card-body.text-sm-start
+                div.d-flex.align-items-center.justify-content-between.card_custom
+
+                  if(session.auth_store && !session.auth_store.user_subscription_id)
+                    span 3. Add your billing details to start your subscription
+
+                    div.card-button.text-center.text-sm-end.mt-3.mt-sm-0 
+                      a#payment_methods_button.btn.btn-primary(href=`/${session.auth_store.id}/billing-details`) Add
+                  else
+                    span 3. Add your billing details to renew your subscription
+               
+                    <i id="billing_details_icon" class="bi bi-check-circle-fill card-button-icon"></i>
+
+            .card
+              .card-body.text-sm-start
+                div.d-flex.align-items-center.justify-content-between.card_custom                    
+                  span 4. Add Checkout Master on your store’s theme
+                  if(session.auth_store && (!session.auth_store.customize_checkout_preview || !session.auth_store.customize_checkout_publish))
+                    div.card-button.text-center.text-sm-end.mt-3.mt-sm-0 
+                      a#customize_checkout_button.btn.btn-primary(href=`/${session.auth_store.id}/customize-checkout`)
+                        if(session.auth_store.customize_checkout_publish && !session.auth_store.customize_checkout_preview)
+                          |Preview
+                        else if(session.auth_store && (!session.auth_store.customize_checkout_publish && session.auth_store.customize_checkout_preview))
+                          |Publish
+                        else
+                          |Preview & Publish
+                  else
+                    <i id="customize_checkout_icon" class="bi bi-check-circle-fill card-button-icon"></i>
+      
+      else
+        div.row.storesetup_complete
+          div.col-md-6
+            div.sec_img 
+              img(src='/assets/img/dashboard.png')
+
+          div.col-md-6
+            .date_label
+              label Metrics
+              .datepicker
+                .datepicker-input-wrapper.from
+                  label 
+                    | From
+                  input(data-function='datepicker' name='from' type='date' value='02.01.2023' aria-label='Use the arrow keys to pick a date')
+                .datepicker-input-wrapper.to
+                  label
+                    | To
+                  input(data-function='datepicker' name='to' type='date' value='02.02.2023' aria-label='Use the arrow keys to pick a date')
+                  .card.dashboard.dashboard--x
+            .mat_det
+              .metric
+                .metric-number.metric-number--big
+                  | 0
+                  span.accent %
+                h5
+                  | Online Store
+                  br
+                  | conversion rate
+              .details
+                .details-row
+                  .details-row-title
+                    .icon
+                      i.icon.ion-ios-cart.accent
+                    .title
+                      span.label
+                        | Added to cart
+                      span
+                        | 00 times
+                  .details-row-stat
+                    | 00.00
+                    span.accent
+                      | %
+                .details-row
+                  .details-row-title
+                    .icon
+                      i.icon.ion-card.accent
+                    .title
+                      span.label
+                        | Reached checkout
+                      span
+                        | 00 times
+                  .details-row-stat
+                    | 00.00
+                    span.accent
+                      | %
+                .details-row
+                  .details-row-title
+                    .icon
+                      i.icon.ion-android-checkmark-circle.accent
+                    .title
+                      span.label
+                        | Completed checkout
+                      span
+                        | 0 times
+                  .details-row-stat
+                    | 0
+                    span.accent
+                      | %
+            .row
+              .col-12.col-lg-6
+                .card.dashboard.dashboard--y
+                  .metric
+                    .metric-number
+                      | &euro;0.00
+                    h5
+                      | Upsells Amount
+                  .details
+                    .details-row
+                      .details-row-title
+                        .title
+                          span.label
+                            | Shown Upsell
+                          span
+                            | 0 times
+                      .details-row-stat
+                        | 00.00
+                        span.accent
+                          | %
+                    .details-row
+                      .details-row-title
+                        .title
+                          span.label
+                            | Added Upsell
+                          span
+                            | 0 times
+                      .details-row-stat
+                        | 0
+                        span.accent
+                          | %
+                    .details-row
+                      .details-row-title
+                        .title
+                          span.label
+                            | Purchased Upsell
+                          span
+                            | 0 times
+                      .details-row-stat
+                        | 0
+                        span.accent
+                          | %
+              .col-12.col-lg-6
+                .card.dashboard.dashboard--y
+                  .icon
+                    i.icon.ion-email
+                  .metric
+                    .metric-number.metric-number--small
+                      | &euro;0.00
+                    h5
+                      | Email Recovery
+
+            
+            
+  
+						
+block scripts
+    //- script(type='text/javascript', src='/assets/js/custom/dashboard.js')

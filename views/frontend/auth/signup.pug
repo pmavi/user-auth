@@ -1,0 +1,23 @@
+extends ../../layout/main
+
+block content 
+    .wrap
+        h4 Sign Up
+        form#login
+            label(for="first_name") Name 
+            input#first_name(type="text")
+            label(for="email") Email
+            input#email(type="text")
+            label(for="password") Password
+            input#password(type="password")
+            #submit
+            input#submit-button(type="submit" value="Sign Up")
+            label(for="submit-button")
+            .dots
+                a(href="/login") Already have a account?Log In
+
+
+
+block scripts
+    script(src='/assets/js/auth.js')
+

@@ -1,0 +1,69 @@
+extends ../../layouts/backend_layout
+
+block content 
+    .container
+        section.section.register.min-vh-100.d-flex.flex-column.align-items-center.justify-content-center.py-4
+            .container
+                .row.justify-content-center
+                    .col-lg-4.col-md-6.d-flex.flex-column.align-items-center.justify-content-center
+                        .d-flex.justify-content-center.py-4
+                            a.logo.d-flex.align-items-center.w-auto(href="#")
+                                img(src='/assets/img/logo_checkout.png', alt='logo')
+                                
+                        // End Logo
+                        .card.mb-3
+                            .card-body
+                                .pt-4.pb-2
+                                    h5.card-title.text-center.pb-0.fs-4 Create an Account
+                                    p.text-center.small Enter your personal details to create account
+                                form#register_form.row.g-3(method="post", autocomplete="off")
+                                    .col-12
+                                        label.form-label First Name
+                                        input.form-control.required(
+                                            type="text",
+                                            name="first_name",value=""
+                                        )
+
+                                    .col-12
+                                        label.form-label Last Name
+                                        input.form-control(
+                                            type="text",
+                                            name="last_name",value=""
+                                        )
+                                   
+                                    .col-12
+                                        label.form-label Email
+                                        input.form-control.required(
+                                            type="email",
+                                            name="email", value =""
+                                        )
+
+                                    .col-12
+                                        label.form-label Password
+                                        input.form-control.required(
+                                            type="password",
+                                            name="password", value="", id="password"
+                                        )
+                                        div#password-strength-status
+                                    .col-12
+                                        label.form-label Confirm Password
+                                        input.form-control.required(
+                                            type="password",
+                                            name="confirm_password", value=""
+                                        )
+
+                                    .col-12
+                                        .form-check
+                                            input.form-check-input(name="terms", type="checkbox", required)
+                                            label.form-check-label(for="acceptTerms") I agree and accept the 
+                                                a(href="#") terms and conditions
+
+                                    .col-12
+                                        button#register_btn.btn.btn-primary.w-100(type="submit" disabled) Create Account 
+                                                     
+                                    .col-12
+                                        p.small.mb-0 Already have an account? 
+                                            a#go_back_login(href="/login" disabled) Log in
+
+block scripts
+    script(type='text/javascript', src='/assets/js/custom/auth.js')

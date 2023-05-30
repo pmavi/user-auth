@@ -1,0 +1,123 @@
+extends ../layouts/backend_layout
+
+block content 
+   main#main.main
+        .pagetitle
+            h1 Account Settings
+            nav
+                ol.breadcrumb
+                    li.breadcrumb-item
+                        if(store_id)
+                            a(href=`${store_id}/dashboard`) Dashboard
+                        else 
+                            a(href=`/store-connect`) Dashboard
+                    li.breadcrumb-item.active Profile
+        
+        section.section.profile
+            .row
+                .col-xl-4
+                    .card
+                        .card-body.profile-card.pt-4.d-flex.flex-column.align-items-center
+                            img.rounded-circle(
+                                src=`${user.avatar ? "/uploads/" + user.avatar : "/assets/img/profile-img.jpg"}`,
+                                alt="Profile"
+                            )
+                            h2 #{user.first_name}
+                          
+                .col-xl-8
+                    .card
+                        .card-body.pt-3
+                            // Bordered Tabs
+                            ul.nav.nav-tabs.nav-tabs-bordered
+                                li.nav-item
+                                    button.nav-link.active(data-bs-toggle="tab", data-bs-target="#profile-overview") Overview
+                                li.nav-item
+                                    button.nav-link(data-bs-toggle="tab", data-bs-target="#profile-edit") Edit Profile
+                                li.nav-item
+                                    button.nav-link(data-bs-toggle="tab", data-bs-target="#profile-change-password") Change Password
+
+                            .tab-content.pt-2
+                                #profile-overview.tab-pane.fade.show.active.profile-overview
+                                    h5.card-title Profile Details
+                                    .row
+                                        .col-lg-3.col-md-4.label First Name
+                                        .col-lg-9.col-md-8 #{user.first_name}
+                                    .row
+                                        .col-lg-3.col-md-4.label Last Name
+                                        .col-lg-9.col-md-8 #{user.last_name}
+                                    .row
+                                        .col-lg-3.col-md-4.label Email
+                                        .col-lg-9.col-md-8 #{user.email}
+
+                                // Profile Edit Form
+                                #profile-edit.tab-pane.fade.profile-edit.pt-3
+                                    form#edit_profile.row.g-3(method="post")
+                                        .row.mb-5
+                                            label.col-md-4.col-lg-3.col-form-label(for="profileImage") Profile Image
+                                            .col-md-8.col-lg-9
+                                                input#store_id(type="hidden" name="store_id" value=store_id)
+                                                img#blah(
+                                                    src=`${user.avatar ? "/uploads/" + user.avatar : "/assets/img/profile-img.jpg"}`,
+                                                    alt="Profile"
+                                                )
+                                                input#avatar(type='file' name='file' accept="image/*" style='display: none;')
+                                                
+                                                if(user.avatar)
+                                                    .pt-2.d-flex
+                                                        //- a#avatar_upload_btn.display.btn.btn-primary.btn-sm(href="#", title="Upload new profile image")
+                                                            //- i.bi.bi-upload
+                                                        a#avatar_delete_btn.btn.btn-danger.btn-sm(href="#", title="Remove my profile image")
+                                                            i.bi.bi-trash
+                                        
+                                        .row.mb-3#edit-form
+                                            label.col-md-4.col-lg-3.col-form-label Fist Name
+                                            .col-md-8.col-lg-9
+                                                input.form-control.required(
+                                                    type="text",
+                                                    name="first_name",
+                                                    value=user.first_name
+                                                )
+                                        .row.mb-3
+                                            label.col-md-4.col-lg-3.col-form-label Last Name
+                                            .col-md-8.col-lg-9
+                                                input.form-control.required(
+                                                    type="text",
+                                                    name="last_name",
+                                                    value=user.last_name
+                                                )
+                                        .row.mb-3
+                                            label.col-md-4.col-lg-3.col-form-label Email
+                                            .col-md-8.col-lg-9
+                                                input.form-control.required(
+                                                    type="email",
+                                                    name="email",
+                                                    value=user.email
+                                                    disabled
+                                                )
+                                        .text-center
+                                            button.btn.btn-primary(type="submit") Save Changes
+                                
+                                // Change Password Form
+                                #profile-change-password.tab-pane.fade.pt-3
+                                    form#edit_password.row.g-3(method="post")
+                                        .row.mb-3
+                                            label.col-md-4.col-lg-3.col-form-label Current Password
+                                            .col-md-8.col-lg-9
+                                                input#current-password.form-control.required(type="password", name="current_password")
+                                        .row.mb-3
+                                            label.col-md-4.col-lg-3.col-form-label New Password
+                                            .col-md-8.col-lg-9
+                                                input#new-password.form-control.required(type="password", name="new_password")
+                                                div
+                                                    div#new-password-strength-status
+                                        .row.mb-3
+                                            label.col-md-4.col-lg-3.col-form-label Confirm Password
+                                            .col-md-8.col-lg-9
+                                                input#confirm-password.form-control.required(type="password", name="confirm_password")
+                                                div 
+                                                    div#confirm-password-strength-status
+                                        .text-center
+                                            button#change-password.btn.btn-primary(type="submit") Change Password
+                                    
+block scripts
+    script(type='text/javascript', src='/assets/js/custom/accountSettings.js')
